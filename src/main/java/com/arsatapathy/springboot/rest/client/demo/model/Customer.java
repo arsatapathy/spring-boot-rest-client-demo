@@ -1,6 +1,9 @@
 package com.arsatapathy.springboot.rest.client.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Customer {
@@ -9,8 +12,8 @@ public class Customer {
     private String customerName;
     private String customerPhone;
 
-    public Customer() {
-    }
+    @JsonManagedReference
+    private List<Purchase> purchases;
 
     public long getCustomerId() {
         return customerId;
@@ -36,12 +39,21 @@ public class Customer {
         this.customerPhone = customerPhone;
     }
 
+    public List<Purchase> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(List<Purchase> purchases) {
+        this.purchases = purchases;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
                 "customerId=" + customerId +
                 ", customerName='" + customerName + '\'' +
                 ", customerPhone='" + customerPhone + '\'' +
+                ", purchases=" + purchases +
                 '}';
     }
 }
